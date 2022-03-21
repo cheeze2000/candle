@@ -6,6 +6,8 @@ This framework is still a work in progress with very minimal features and potent
 
 # Usage
 ```hs
+{-# LANGUAGE OverloadedStrings #-}
+
 import Candle
 
 app :: Router
