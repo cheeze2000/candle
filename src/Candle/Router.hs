@@ -36,7 +36,7 @@ data Route = Route
 
 findParams :: RequestUrl -> RouteUrl -> Maybe Params
 findParams (x:xs) (y:ys)
-  | T.head y == ':' = Just ((T.tail y, x) :) <*> findParams xs ys
+  | T.head y == ':' = ((T.tail y, x) :) <$> findParams xs ys
   | x == y          = findParams xs ys
   | otherwise       = Nothing
 findParams xs ys
