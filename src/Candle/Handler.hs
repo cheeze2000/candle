@@ -48,8 +48,8 @@ query key = do
 bytes :: B.ByteString -> HandlerM ()
 bytes b = modify (\res -> res { resBody = b })
 
-header :: (T.Text, T.Text) -> HandlerM ()
-header h = modify (\res -> let hs = resHeaders res in res { resHeaders = h : hs })
+header :: T.Text -> T.Text -> HandlerM ()
+header a b = modify (\res -> let hs = resHeaders res in res { resHeaders = (a, b) : hs })
 
 status :: Int -> HandlerM ()
 status n = modify (\res -> res { resStatus = n })
