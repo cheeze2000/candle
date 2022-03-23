@@ -11,6 +11,8 @@ app = do
     text "<b>Hello, World!</b>"
   get "/teapot" $ do
     status 418
+  get "/readme" $ do
+    file "./README.md"
 
 main :: IO ()
 main = listen 3000 app
