@@ -3,6 +3,7 @@ module Candle.Handler
   , body
   , bytes
   , defaultHandler
+  , file
   , header
   , param
   , query
@@ -47,6 +48,9 @@ query key = do
 
 bytes :: B.ByteString -> HandlerM ()
 bytes b = modify (\res -> res { resBody = b })
+
+file :: FilePath -> HandlerM ()
+file path = liftIO (B.readFile path) >>= bytes
 
 header :: T.Text -> T.Text -> HandlerM ()
 header a b = modify (\res -> let hs = resHeaders res in res { resHeaders = (a, b) : hs })
