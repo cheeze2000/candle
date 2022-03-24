@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Candle.Handler
   ( HandlerM
   , body
@@ -7,6 +9,7 @@ module Candle.Handler
   , header
   , param
   , query
+  , redirect
   , status
   , text
   ) where
@@ -54,6 +57,11 @@ file path = liftIO (B.readFile path) >>= bytes
 
 header :: T.Text -> T.Text -> HandlerM ()
 header a b = modify (\res -> let hs = resHeaders res in res { resHeaders = (a, b) : hs })
+
+redirect :: T.Text -> HandlerM ()
+redirect url = do
+  header "Location" url
+  status 302
 
 status :: Int -> HandlerM ()
 status n = modify (\res -> res { resStatus = n })
