@@ -13,6 +13,8 @@ app = do
     status 418
   get "/readme" $ do
     file "./README.md"
+  get "/redirect" $ do
+    redirect "/bold"
 
 main :: IO ()
 main = listen 3000 app
